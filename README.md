@@ -1,6 +1,6 @@
 # An Interactive Web-Based Dashboard to Examine Time Series Forecast Methods: Application to Walmart Sales
 
-## Forecasting Methods
+## Time Series Forecast Methods
 
 1. Using Smoothing Techniques
    1. Moving Average
