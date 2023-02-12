@@ -1,4 +1,4 @@
-# An Interactive Web-Based Dashboard to Examine Time Series Forecast Methods: Application to Walmart Sales
+# A Comparative Study of Time Series Forecast Methods: Application to Walmart Sales
 
 ## Time Series Forecast Methods
 
