@@ -1,6 +1,6 @@
 # A Comparative Study of Time Series Forecast Methods: Application to Walmart Sales
 
-<img src="https://github.com/nphan20181/time_series_forecast/blob/main/images/ts-forecast-web-page.png", width="800px", height="700px"/>
+<img src="[url](https://github.com/nphan20181/time_series_forecast/blob/main/images/ts-forecast-web-page.png)" width="70%" height="70%">
 
 ## Time Series Forecast Methods
 
