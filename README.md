@@ -1,6 +1,6 @@
 # A Comparative Study of Time Series Forecast Methods: Application to Walmart Sales
 
-_URL:_ [https://ts-forecast.herokuapp.com/](https://ts-forecast.herokuapp.com/)
+__URL:__ [https://ts-forecast.herokuapp.com/](https://ts-forecast.herokuapp.com/)
 
 <img src="https://github.com/nphan20181/time_series_forecast/blob/main/images/ts-forecast-web-page.png" width="90%" height="90%" />
 
