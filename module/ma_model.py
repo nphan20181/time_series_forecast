@@ -53,6 +53,9 @@ class MovingAverage:
         else:    # Moving Average
             self.ma[self.ma_label] = self.train[self.y_label].rolling(self.m).mean()
             
+        # copy moving values to the training set
+        self.train[self.ma_label] = self.ma[self.ma_label]
+            
         # compute ratio y_t / M_t (current y value / current moving value)
         self.ma['Ratio'] = self.train[self.y_label] / self.ma[self.ma_label]
         self.ma.dropna(inplace=True)
@@ -86,7 +89,7 @@ class MovingAverage:
         # compute y-values of the extended trend line for the next n weeks
         self.ma_extend = [intercept + slope * x for x in range(1, n)]
         
-    def predict(self, ts_data):
+    def predict(self, ts_data, data_set=''):
         '''
         Forecast future values.
         
@@ -100,12 +103,17 @@ class MovingAverage:
         # get seasonal index
         forecast['Seasonal Index'] = forecast['Week'].map(self.seasonal_index['Ratio'])
         
+        
         # get values of the extended trend for the next n weeks
         self.compute_ma_extend(len(forecast) + 2)
         forecast[self.ma_extend_label] = self.ma_extend[:forecast.shape[0]]
         
-        # predict future value by multiplying extended trend value and corresponding seasonal index
-        forecast[self.ma_forecast_label] = forecast[self.ma_extend_label] * forecast['Seasonal Index']
+        if data_set != 'train':
+            # predict future value by multiplying extended trend value and corresponding seasonal index
+            forecast[self.ma_forecast_label] = forecast[self.ma_extend_label] * forecast['Seasonal Index']
+        else:
+            # for Train data, forecast = moving value * seasonal index
+            forecast[self.ma_forecast_label] = forecast[self.ma_label] * forecast['Seasonal Index']
         
         # convert forecast value back to Million (original observe value) 
         if self.transform == 'log':
@@ -113,8 +121,9 @@ class MovingAverage:
         elif self.transform == 'sqrt':
             forecast[self.ma_forecast_label] = forecast[self.ma_forecast_label]**2
         
-        # save a copy of the predictions
-        self.forecast = forecast.copy()
+        if data_set == '':
+            # save a copy of forecast
+            self.forecast = forecast.copy()
         
         return forecast
     
@@ -129,15 +138,15 @@ class MovingAverage:
         
         # make a copy of original data
         self.data = pd.concat([train, test], axis=0)  
-        self.train = train.copy()
+        self.train = train
         
         self.compute_moving_values()                                    # compute moving values
         seasonal_index = self.ma.groupby(['Week'])['Ratio'].mean()      # compute seasonal index
         self.seasonal_index = pd.DataFrame(seasonal_index).to_dict()    # save seasonal index for later retrieval
         
         # forecast sale values
-        self.train = self.predict(train)
-        self.test = self.predict(test)
+        self.train = self.predict(train, data_set='train')
+        self.test = self.predict(test, data_set='test')
         
     def evaluate(self):
         '''
@@ -182,9 +191,10 @@ class MovingAverage:
         
         self.evaluate()      # evaluate model
         fig = go.Figure()    # create figure
+        train = self.train.dropna()
         
         # create line plot of Train/Test
-        fig.add_trace(go.Scatter(x=self.ma['Time Series Index'], y=self.train['Train Error'], mode='lines', name='Train Error'))
+        fig.add_trace(go.Scatter(x=train['Time Series Index'], y=train['Train Error'], mode='lines', name='Train Error'))
         fig.add_trace(go.Scatter(x=self.test['Time Series Index'], y=self.test['Test Error'], mode='lines', name='Test Error'))
         
         # update figure's property
@@ -233,7 +243,7 @@ class MovingAverage:
         fig.add_trace(go.Scatter(x=seasonal_index_df.index, y=seasonal_index_df['Ratio'], mode='lines'))
         
         # update layout
-        fig.update_xaxes(title_text=x_label)
+        fig.update_xaxes(title_text='<b>' + x_label + '</b>')
         fig.update_yaxes(title_text='<b>Seasonal Index</b>')
         fig.update_layout(legend=dict(orientation="h", yanchor="bottom", y=1.05, xanchor="right", x=1),
                           title_text="<b>" + str(self.m) + " Points Seasonal Index</b>", width=width, height=height)
