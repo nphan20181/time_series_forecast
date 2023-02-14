@@ -11,6 +11,6 @@ __URL:__ [https://ts-forecast.herokuapp.com/](https://ts-forecast.herokuapp.com/
    1. Exponential Smoothing
    1. Holt-Winters
 1. Multiple Linear Regression
-1. Autocorrelation & Autoregressive Error
 1. Autoregressive - Moving Average (ARMA)
+1. SARIMAX
 1. Recurrent Neural Networks
