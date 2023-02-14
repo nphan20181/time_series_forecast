@@ -38,11 +38,24 @@ def create_corr_plot(series, plot_pacf=False, n_lags=52):
     fig.update_layout(title=title)
     fig.show()
 
-def plot_metrics(scores_df, width=600, height=430):
-    fig = px.parallel_categories(scores_df, color="MAPE",
-                                 dimensions=['Model', 'MAPE', 'MAD', 'RMSE'],
-                                 color_continuous_scale=px.colors.diverging.Tealrose,
-                                 color_continuous_midpoint=2)
-    fig.update_layout(title_text="<b>Model Evaluation on Test Data</b>", width=width, height=height)
+def plot_metrics(model_scores, x_label, metric='MAPE', height=400, width=600):
+    '''
+    Create and return a bar plot of evaluation scores for the model.
+    
+    Parms:
+      - model_scores: a data frame containing evaluation scores.
+      - x_label: name of a column in the data frame for showing values on x-axis
+      - metric: name of the metric for displaying the score
+    '''
+    
+    # create a bar plot
+    fig = px.bar(model_scores[model_scores.Metric == metric], x=x_label, y='Score')
+    
+    # update axis labels and figure's layout
+    fig.update_xaxes(title_text='<b>' + x_label + '<b>')
+    fig.update_yaxes(title_text='<b>MAPE<b>')
+    fig.update_layout(height=height, width=width, 
+                      title_text="<b>Mean Absolute Percentage Error for " + "m-" 
+                      + model_scores['Type'].values[0] + "</b>")
     
     return fig

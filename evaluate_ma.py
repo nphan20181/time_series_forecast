@@ -24,8 +24,22 @@ def create_ma_metrics_file(train, test):
                     metrics = model.evaluate()
                 else:  # append evaluation metrics to existing data frame, drop duplicates
                     metrics = pd.concat([metrics, model.evaluate()], axis=0)
-                    metrics.drop_duplicates(inplace=True, ignore_index=True, keep='first', subset='Model')
+                    metrics.drop_duplicates(inplace=True, ignore_index=True)
     
+    
+    def getModelType(s):
+        '''
+        Get model's type from model's name string.
+        '''
+        
+        s_split = s.split('-')   # split the string on hyphen
+        model_type = s_split[1] if len(s_split) == 2 else s_split[1] + '-' + s_split[2]  # get model's type
+        return model_type
+    
+    # get moving window (m) and model's type from model's name
+    metrics['Moving Window (m)'] = metrics['Model'].apply(lambda x: x.split('-')[0])
+    metrics['Type'] = metrics['Model'].apply(getModelType)
+
     # save evaluation results to csv
     metrics.to_csv('data/ma_metrics.csv', index=False)
 

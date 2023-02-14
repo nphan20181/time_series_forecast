@@ -12,9 +12,12 @@ def evaluate_model(model_name, forecast, actual):
     '''
     
     n = len(forecast)
-    mape = np.round(sum(np.abs((actual - forecast) / actual)) / n, 4)
-    mad = np.round(sum(np.abs(actual - forecast)) / n, 4)
-    rmse = np.round(np.sqrt(sum((actual - forecast)**2) / n), 4)
+    deviations = np.abs((actual - forecast))               # compute absolute error: actual - predict
+    mape = np.round(sum(deviations / actual) / n, 4)       # compute mean absolute percentage error
+    mad = np.round(sum(deviations) / n, 4)                 # compute mean absolute deviation
+    rmse = np.round(np.sqrt(sum(deviations**2) / n), 4)    # compute root mean square error
     
-    # create data frame
-    return pd.DataFrame(dict({'Model': [model_name], 'MAPE': [mape], 'MAD': [mad], 'RMSE': [rmse]}))
+    # return metrics data frame
+    return pd.DataFrame({'Model': [model_name]*3, 
+                         'Metric':['MAPE', 'MAD', 'RMSE'], 
+                         'Score': [mape, mad, rmse]})
