@@ -6,7 +6,7 @@ __URL:__ [https://ts-forecast.herokuapp.com/](https://ts-forecast.herokuapp.com/
 
 ## Time Series Forecast Methods
 
-1. Using Smoothing Techniques
+1. Smoothing Techniques
    1. [Moving Average](https://github.com/nphan20181/time_series_forecast/blob/main/module/ma_model.py)
    1. Exponential Smoothing
    1. Holt-Winters
