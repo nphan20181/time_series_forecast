@@ -39,6 +39,18 @@ class MovingAverage:
         m_name = str(m) + '-' + self.MTYPE.get(moving_type)
         self.model_name = m_name if self.transform == '' else m_name + '-' + self.transform
     
+    def reverse_transform(self, ts_data):
+        '''
+        Convert transformed values back to original values.
+        '''
+        
+        if self.transform == 'log':      # reverse log transformation
+            return np.exp(ts_data)
+        elif self.transform == 'sqrt':   # reverse square root transformation
+            return ts_data**2
+        else:
+            return ts_data
+    
     def compute_moving_values(self):
         '''
         Compute moving values based on previous m windows.
@@ -103,7 +115,6 @@ class MovingAverage:
         # get seasonal index
         forecast['Seasonal Index'] = forecast['Week'].map(self.seasonal_index['Ratio'])
         
-        
         # get values of the extended trend for the next n weeks
         self.compute_ma_extend(len(forecast) + 2)
         forecast[self.ma_extend_label] = self.ma_extend[:forecast.shape[0]]
@@ -115,11 +126,8 @@ class MovingAverage:
             # for Train data, forecast = moving value * seasonal index
             forecast[self.ma_forecast_label] = forecast[self.ma_label] * forecast['Seasonal Index']
         
-        # convert forecast value back to Million (original observe value) 
-        if self.transform == 'log':
-            forecast[self.ma_forecast_label] = np.exp(forecast[self.ma_forecast_label])
-        elif self.transform == 'sqrt':
-            forecast[self.ma_forecast_label] = forecast[self.ma_forecast_label]**2
+        # convert transformed value back to original dollar value
+        forecast[self.ma_forecast_label] = self.reverse_transform(forecast[self.ma_forecast_label])
         
         if data_set == '':
             # save a copy of forecast
