@@ -2,8 +2,6 @@
 
 __URL:__ [https://ts-forecast.herokuapp.com/](https://ts-forecast.herokuapp.com/)
 
-<img src="https://github.com/nphan20181/time_series_forecast/blob/main/images/ts-forecast-web-page.png" width="90%" height="90%" />
-
 ## Time Series Forecast Methods
 
 1. Smoothing Techniques
