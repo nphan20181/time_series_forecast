@@ -1,4 +1,4 @@
-# Interactive Dashboard to Experiment Time Series Forecast Methods: Application to Walmart Sales
+# Interactive Dashboards to Experiment Time Series Forecast Methods: Application to Walmart Sales
 
 ## Time Series Forecast Methods
 
