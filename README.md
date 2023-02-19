@@ -3,7 +3,7 @@
 ## Time Series Forecast Methods
 
 1. Smoothing Techniques
-   1. Moving Average
+   1. Moving Average ([Website](https://ma-forecast.herokuapp.com/))
    1. Exponential Smoothing ([Website](https://es-forecast.herokuapp.com/))
    1. Holt-Winters
 1. Multiple Linear Regression
