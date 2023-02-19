@@ -5,6 +5,8 @@ import plotly.express as px
 from statsmodels.tsa.stattools import pacf
 from statsmodels.tsa.stattools import acf
 
+COLORS = {'Observe':'blue', 'Train':'#009933', 'Test':'red', 'Forecast':'#e68a00'}
+
 def create_corr_plot(series, plot_pacf=False, n_lags=52):
     '''
     Create ACF / PACF plot.
@@ -38,7 +40,70 @@ def create_corr_plot(series, plot_pacf=False, n_lags=52):
     fig.update_layout(title=title)
     fig.show()
 
-def plot_metrics(model_scores, x_label, metric='MAPE', height=400, width=600):
+def plot_forecast(ts_data, train, test, forecast_data, forecast_label, 
+                  x_label='Date', y_label='Weekly Sales (Million)', width=800, height=500):
+    '''
+    Create Observe vs. Forecast plot and return the figure.
+    
+    Parms:
+      - ts_data: original time series data.
+      - forecast: model's prediction
+    '''
+    
+    fig = go.Figure()
+        
+    # create a line plot of observe data
+    fig.add_trace(go.Scatter(x=ts_data[x_label], y=ts_data[y_label], mode='lines', name='Observe'))
+    
+    # create a line plot of Train
+    fig.add_trace(go.Scatter(x=train[x_label], y=train[forecast_label], mode='lines', name='Train',
+                             line=dict(color=COLORS.get('Train'))))
+    
+    # create a line plot of Test
+    fig.add_trace(go.Scatter(x=test[x_label], y=test[forecast_label], mode='lines', name='Test',
+                             line=dict(color=COLORS.get('Test'))))
+        
+    # create a line plot of forecast data
+    fig.add_trace(go.Scatter(x=forecast_data[x_label], y=forecast_data[forecast_label], mode='lines', name=forecast_label,
+                             line=dict(color=COLORS.get('Forecast'))))
+        
+    # update figure's property
+    fig.update_xaxes(title_text="<b>" + x_label + "</b>")
+    fig.update_yaxes(title_text='<b>Weekly Sales</b>')
+    fig.update_layout(legend=dict(orientation="h", yanchor="bottom", y=1.05, xanchor="right", x=1),
+                      title_text="<b>Observe vs. Forecast (Million)</b>", width=width, height=height)
+        
+    return fig
+
+def plot_errors(train_data, test, x_label='Time Series Index', observe_label='Weekly Sales (Million)', width=800, height=500):
+    '''
+    Create Train vs. Test Error plot and return the figure.
+    
+    Parms:
+      - train_data: train dataset
+      - test: test dataset
+      - x_label: x-axis label
+      - observe_label: label of observe values in time series dataset
+      - width: figure's width
+      - height: figure's height
+    '''
+    
+    fig = go.Figure()    # create figure
+    train = train_data.dropna()
+        
+    # create line plot of Train/Test Error
+    fig.add_trace(go.Scatter(x=train[x_label], y=train['Train Error'], mode='lines', name='Train Error'))
+    fig.add_trace(go.Scatter(x=test[x_label], y=test['Test Error'], mode='lines', name='Test Error'))
+        
+    # update figure's property
+    fig.update_xaxes(title_text="<b>" + x_label + "</b>")
+    fig.update_yaxes(title_text='<b>' + observe_label + '</b>')
+    fig.update_layout(legend=dict(orientation="h", yanchor="bottom", y=1.05, xanchor="right", x=1),
+                      title_text="<b>Train vs. Test Error</b>", width=width, height=height)
+        
+    return fig
+
+def plot_metrics(model_scores, x_label, fig_title, metric='MAPE', height=400, width=600):
     '''
     Create and return a bar plot of evaluation scores for the model.
     
@@ -48,14 +113,14 @@ def plot_metrics(model_scores, x_label, metric='MAPE', height=400, width=600):
       - metric: name of the metric for displaying the score
     '''
     
+    metrics_df = model_scores[model_scores.Metric == metric]
+    
     # create a bar plot
-    fig = px.bar(model_scores[model_scores.Metric == metric], x=x_label, y='Score')
+    fig = go.Figure(data=[go.Bar(x=metrics_df[x_label], y=metrics_df['Score'])])
     
     # update axis labels and figure's layout
     fig.update_xaxes(title_text='<b>' + x_label + '<b>')
-    fig.update_yaxes(title_text='<b>MAPE<b>')
-    fig.update_layout(height=height, width=width, 
-                      title_text="<b>Mean Absolute Percentage Error for " + "m-" 
-                      + model_scores['Type'].values[0] + "</b>")
+    fig.update_yaxes(title_text='<b>' + metric + '<b>')
+    fig.update_layout(height=height, width=width, title_text=fig_title)
     
     return fig

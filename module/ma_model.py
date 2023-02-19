@@ -2,17 +2,12 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 from scipy.stats import linregress
-from module.util_functions import evaluate_model
+import module.util_functions as utf
 
 
 class MovingAverage:
     # moving type
     MTYPE = {'MA': 'Moving Average', 'MM': 'Moving Median'}
-    
-    # name of target variable
-    TARGET = {'':'Weekly Sales (Million)', 
-           'log': 'Log of Weekly Sales (Million)',
-           'sqrt': 'Square Root of Weekly Sales (Million)'}
     
     def __init__(self, m, transform='', moving_type='MA'):
         '''
@@ -23,8 +18,8 @@ class MovingAverage:
         '''
         
         self.m = m
-        self.y_label = self.TARGET.get(transform)
-        self.observe_label = self.TARGET.get('')
+        self.y_label = utf.TARGET.get(transform)
+        self.observe_label = utf.TARGET.get('')
         self.moving_type = moving_type
         self.transform = transform
         
@@ -32,24 +27,12 @@ class MovingAverage:
         self.ma_label = str(m) + '-' + moving_type
         self.ma_label = self.ma_label if self.transform == '' else self.ma_label + '-' + self.transform
         
-        self.ma_extend_label = self.ma_label + ' Extended Trend'
-        self.ma_forecast_label = self.ma_label + ' Forecast'
+        self.ma_extend_label = self.ma_label + ' Extended Trend'     # label for extended trend values
+        self.ma_forecast_label = self.ma_label + ' Forecast'         # label for forecast values
         
         # set model's name
         m_name = str(m) + '-' + self.MTYPE.get(moving_type)
         self.model_name = m_name if self.transform == '' else m_name + '-' + self.transform
-    
-    def reverse_transform(self, ts_data):
-        '''
-        Convert transformed values back to original values.
-        '''
-        
-        if self.transform == 'log':      # reverse log transformation
-            return np.exp(ts_data)
-        elif self.transform == 'sqrt':   # reverse square root transformation
-            return ts_data**2
-        else:
-            return ts_data
     
     def compute_moving_values(self):
         '''
@@ -85,6 +68,9 @@ class MovingAverage:
         # get equation of the extended trend line (y=mx+b) using the last 2 points of the moving line
         slope, intercept, _, _, _ = linregress([0, 1], self.ma[self.ma_label][-2:].to_list())
         
+        # set trend line's equation
+        self.ext_trend_line = "y = " + str(np.round(intercept, 4)) + " + (" + str(np.round(slope, 4)) + ")x"
+        
         return (slope, intercept)
     
     def compute_ma_extend(self, n=52):
@@ -101,7 +87,7 @@ class MovingAverage:
         # compute y-values of the extended trend line for the next n weeks
         self.ma_extend = [intercept + slope * x for x in range(1, n)]
         
-    def predict(self, ts_data, data_set=''):
+    def predict(self, ts_data, save_data=False):
         '''
         Forecast future values.
         
@@ -119,23 +105,18 @@ class MovingAverage:
         self.compute_ma_extend(len(forecast) + 2)
         forecast[self.ma_extend_label] = self.ma_extend[:forecast.shape[0]]
         
-        if data_set != 'train':
-            # predict future value by multiplying extended trend value and corresponding seasonal index
-            forecast[self.ma_forecast_label] = forecast[self.ma_extend_label] * forecast['Seasonal Index']
-        else:
-            # for Train data, forecast = moving value * seasonal index
-            forecast[self.ma_forecast_label] = forecast[self.ma_label] * forecast['Seasonal Index']
+        # predict future value by multiplying extended trend value and corresponding seasonal index
+        forecast[self.ma_forecast_label] = forecast[self.ma_extend_label] * forecast['Seasonal Index']
         
         # convert transformed value back to original dollar value
-        forecast[self.ma_forecast_label] = self.reverse_transform(forecast[self.ma_forecast_label])
+        forecast[self.ma_forecast_label] = utf.reverse_transform(forecast[self.ma_forecast_label], self.transform)
         
-        if data_set == '':
-            # save a copy of forecast
-            self.forecast = forecast.copy()
+        if(save_data):
+            self.forecast = forecast
         
         return forecast
     
-    def fit(self, train, test):
+    def fit(self, ts_data):
         '''
         Train model and forecast sale values.
         
@@ -144,74 +125,44 @@ class MovingAverage:
           - test: data used for evaluating the model.
         '''
         
-        # make a copy of original data
-        self.data = pd.concat([train, test], axis=0)  
-        self.train = train
+        # duplicate original data, then select Train/Test data
+        self.data = ts_data.copy()
+        self.data['Dataset'] = self.data['Year'].apply(lambda year: 'Train' if year < 2012 else 'Test')
+        self.train = self.data[self.data.Dataset == 'Train'].copy()
+        self.test = self.data[self.data.Dataset == 'Test'].copy()
         
-        self.compute_moving_values()                                    # compute moving values
-        seasonal_index = self.ma.groupby(['Week'])['Ratio'].mean()      # compute seasonal index
-        self.seasonal_index = pd.DataFrame(seasonal_index).to_dict()    # save seasonal index for later retrieval
+        # compute moving values
+        self.compute_moving_values() 
         
-        # forecast sale values
-        self.train = self.predict(train, data_set='train')
-        self.test = self.predict(test, data_set='test')
+        # compute seasonal index
+        if self.moving_type == 'MM':   # seasonal index for Moving Median
+            seasonal_index = self.ma.groupby(['Week'])['Ratio'].median()
+        else:  # seasonal index for Moving Average
+            seasonal_index = self.ma.groupby(['Week'])['Ratio'].mean()
+        
+        # save seasonal index for later retrieval
+        self.seasonal_index = pd.DataFrame(seasonal_index).to_dict()    
+        
+        # get seasonal index for train data
+        self.train['Seasonal Index'] = self.train['Week'].map(self.seasonal_index['Ratio'])
+        
+        # make predictions on Train dataset
+        # for Train data, forecast = moving value * seasonal index
+        self.train[self.ma_forecast_label] = utf.reverse_transform(self.train[self.ma_label] * self.train['Seasonal Index'],
+                                                                   self.transform)
+        self.train['Train Error'] = self.train[self.observe_label] - self.train[self.ma_forecast_label]    # compute Train Error
+        
+        # predict future values on Test dataset
+        self.test = self.predict(self.test)
+        self.test['Test Error'] = self.test[self.observe_label] - self.test[self.ma_forecast_label]        # compute Test Error
         
     def evaluate(self):
         '''
-        Compute Train/Test error, and evaluate Test data using MAPE, MAD, and RMSE.
         Return evaluation metrics on Test data.
         '''
         
-        # compute absolute deviation on Train and Test
-        self.train['Train Error'] = np.abs(self.train[self.observe_label] - self.train[self.ma_forecast_label])
-        self.test['Test Error'] = np.abs(self.test[self.observe_label] - self.test[self.ma_forecast_label])
-        
         # get evaluation metrics on Test set
-        return evaluate_model(self.ma_label, self.test[self.ma_forecast_label], self.test[self.observe_label])
-        
-    def plot_forecast(self, width=800, height=500):
-        '''
-        Create Observe vs. Forecast plot and return the figure.
-        '''
-        
-        fig = go.Figure()
-        
-        # create a line plot of observe data
-        fig.add_trace(go.Scatter(x=self.data['Date'], y=self.data[self.observe_label],
-                         mode='lines', name='Observe'))
-        
-        # create a line plot of forecast data
-        fig.add_trace(go.Scatter(x=self.forecast['Date'], y=self.forecast[self.ma_forecast_label],
-                                 mode='lines', name=self.ma_forecast_label))
-        
-        # update figure's property
-        fig.update_xaxes(title_text="<b>Date</b>")
-        fig.update_yaxes(title_text='<b>Weekly Sales</b>')
-        fig.update_layout(legend=dict(orientation="h", yanchor="bottom", y=1.05, xanchor="right", x=1),
-                          title_text="<b>Observe vs. Forecast (Million)</b>", width=width, height=height)
-        
-        return fig
-    
-    def plot_errors(self, width=800, height=500):
-        '''
-        Create Train vs. Test Error plot and return the figure.
-        '''
-        
-        self.evaluate()      # evaluate model
-        fig = go.Figure()    # create figure
-        train = self.train.dropna()
-        
-        # create line plot of Train/Test
-        fig.add_trace(go.Scatter(x=train['Time Series Index'], y=train['Train Error'], mode='lines', name='Train Error'))
-        fig.add_trace(go.Scatter(x=self.test['Time Series Index'], y=self.test['Test Error'], mode='lines', name='Test Error'))
-        
-        # update figure's property
-        fig.update_xaxes(title_text="<b>Time Series Index</b>")
-        fig.update_yaxes(title_text='<b>' + self.observe_label + '</b>')
-        fig.update_layout(legend=dict(orientation="h", yanchor="bottom", y=1.05, xanchor="right", x=1),
-                          title_text="<b>Train vs. Test Error (" + self.ma_label + ")</b>", width=width, height=height)
-        
-        return fig
+        return utf.evaluate_model(self.ma_label, self.test[self.ma_forecast_label], self.test[self.observe_label])
     
     def plot_ma_components(self, x_label='Time Series Index', width=650, height=440):
         '''
@@ -228,7 +179,7 @@ class MovingAverage:
         fig.add_trace(go.Scatter(x=self.ma[x_label], y=self.ma[self.ma_label], mode='lines', name=self.ma_label))
         
         # plot moving extended trend line
-        fig.add_trace(go.Scatter(x=self.forecast[x_label]-1, y=self.forecast[self.ma_extend_label],
+        fig.add_trace(go.Scatter(x=self.test[x_label]-1, y=self.test[self.ma_extend_label],
                                  mode='lines', name=self.ma_extend_label))
         
         # update figure's property
