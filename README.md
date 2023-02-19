@@ -1,6 +1,5 @@
 # Interactive Dashboards to Experiment Time Series Forecast Methods: Application to Walmart Sales
 
-## Time Series Forecast Methods
 
 1. Smoothing Techniques
    1. [Moving Average Dashboard](https://ma-forecast.herokuapp.com/)
