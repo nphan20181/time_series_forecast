@@ -2,7 +2,7 @@ _Interactive learning often enhances learner’s understanding of complex concep
 
 <hr />
 
-This study builds a dashboard for each of the following time series forecast methods:
+## Time Series Forecast Methods
 
 1. Smoothing Techniques
    1. [Moving Average Dashboard](https://ma-forecast.herokuapp.com/)
@@ -12,3 +12,12 @@ This study builds a dashboard for each of the following time series forecast met
 1. Autoregressive - Moving Average (ARMA)
 1. SARIMAX
 1. Recurrent Neural Networks
+
+<hr />
+
+## References
+
+1. Hyndman, R.J., & Athanasopoulos, G. (2021) Forecasting: principles and practice, 3rd edition, OTexts: Melbourne, Australia. OTexts.com/fpp3. Accessed on February 12, 2023.
+1. Mendenhall, W. (2019). SECOND COURSE IN STATISTICS : regression analysis. S.L.: Prentice Hall.
+
+‌
