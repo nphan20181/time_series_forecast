@@ -2,7 +2,7 @@ _Interactive learning often enhances learner’s understanding of complex concep
 
 <hr />
 
-## Time Series Forecast Methods
+## Time Series Forecast Dashboards
 
 1. Smoothing Techniques
    1. [Moving Average Dashboard](https://ma-forecast.herokuapp.com/)
