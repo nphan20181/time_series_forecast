@@ -4,6 +4,7 @@ _Interactive learning often enhances learner’s understanding of complex concep
 
 ## Time Series Forecast Dashboards
 
+1. Test for Stationarity and Autocorrelation
 1. Smoothing Techniques
    1. [Moving Average Dashboard](https://ma-forecast.herokuapp.com/)$^{1, 2}$
    1. [Exponential Smoothing Dashboard](https://es-forecast.herokuapp.com/)$^2$
