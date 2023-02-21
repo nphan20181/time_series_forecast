@@ -4,6 +4,8 @@ _Interactive learning often enhances learner’s understanding of complex concep
 
 ## Time Series Forecast Dashboards
 
+### Forecasting with Statistical Models
+
 1. Test for Stationarity and Autocorrelation
 1. Smoothing Techniques
    1. [Moving Average Dashboard](https://ma-forecast.herokuapp.com/)$^{1, 2}$
@@ -11,8 +13,12 @@ _Interactive learning often enhances learner’s understanding of complex concep
    1. Holt-Winters
 1. Multiple Regression
 1. Autoregressive - Moving Average (ARMA)
-1. SARIMA
-1. LSTM
+1. Seasonal Autoregressive Intergrated Moving Average (SARIMA)
+
+### Forecasting with Deep Learning Models
+
+1. Convolutional Neural Networks (CNN)
+1. Long-Short Term Memory (LSTM)
 
 <hr />
 
