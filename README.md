@@ -8,10 +8,10 @@ _Interactive learning often enhances learner’s understanding of complex concep
    1. [Moving Average Dashboard](https://ma-forecast.herokuapp.com/)$^{1, 2}$
    1. [Exponential Smoothing Dashboard](https://es-forecast.herokuapp.com/)$^2$
    1. Holt-Winters
-1. Multiple Linear Regression
+1. Multiple Regression
 1. Autoregressive - Moving Average (ARMA)
 1. SARIMAX
-1. Recurrent Neural Networks
+1. LSTM
 
 <hr />
 
