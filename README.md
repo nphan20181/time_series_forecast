@@ -21,6 +21,6 @@ _Interactive learning often enhances learner’s understanding of complex concep
 1. Mendenhall, W. (2019). SECOND COURSE IN STATISTICS : regression analysis. S.L.: Prentice Hall.
 1. Bowerman, B. L., O’Connell, R. T., & Koehler, A. B. (2005). Forecasting, Time Series, and Regression. South-Western Pub.
 1. Geron, A. (2022). Hands-On Machine Learning With Scikit-Learn, Keras, And Tensorflow 3E. S.L.: O’reilly Uk Limited.
-‌
+‌1. François Chollet. (2021). Deep Learning with Python, Second Edition. Shelter Island, Ny Manning Publications.
 
 ‌
