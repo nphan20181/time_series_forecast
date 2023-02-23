@@ -6,6 +6,7 @@ _Interactive learning often enhances learner’s understanding of complex concep
 
 ### Forecasting with Statistical Models
 
+1. Time Series Decomposition
 1. Test for Stationarity and Autocorrelation
 1. Smoothing Techniques
    1. [Moving Average Dashboard](https://ma-forecast.herokuapp.com/)$^{1, 2}$
