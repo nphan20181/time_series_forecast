@@ -7,19 +7,20 @@ _Interactive learning often enhances learner’s understanding of complex concep
 ### Forecasting with Statistical Models
 
 1. Time Series Decomposition
-1. Test for Stationarity and Autocorrelation
+1. Stationarity and Correlations
 1. Smoothing Techniques
-   1. [Moving Average Dashboard](https://ma-forecast.herokuapp.com/)$^{1, 2}$
+   1. Moving Average Dashboard
    1. [Exponential Smoothing Dashboard](https://es-forecast.herokuapp.com/)$^2$
    1. Holt-Winters
 1. Multiple Regression
-1. Autoregressive - Moving Average (ARMA)
+1. Autoregressive Moving Average (ARMA)
+1. Autoregressive Integrated Moving Average (ARIMA)
 1. Seasonal Autoregressive Intergrated Moving Average (SARIMA)
 
 ### Forecasting with Deep Learning Models
 
 1. Convolutional Neural Networks (CNN)
-1. Long-Short Term Memory (LSTM)
+1. Long Short Term Memory (LSTM)
 
 <hr />
 
