@@ -8,12 +8,19 @@ _Interactive learning often enhances learner’s understanding of complex concep
 - [Preprocessed Data](https://github.com/nphan20181/time_series_forecast/blob/main/data/ts_dataset.csv)
 - [Data Preparation Jupyter Notebook](https://github.com/nphan20181/time_series_forecast/blob/main/prepare_ts_data.ipynb)
 
+<hr />
+
+## Time Series Analysis
+
+1. Time Series Decomposition
+1. Stationarity and Correlations
+
+<hr />
+
 ## Time Series Forecast Dashboards
 
 ### Forecasting with Statistical Models
 
-1. Time Series Decomposition
-1. Stationarity and Correlations
 1. Smoothing Techniques
    1. Moving Average Dashboard
    1. <a href="https://es-forecast.herokuapp.com/" target="_blank">Exponential Smoothing Dashboard</a>$^2$
