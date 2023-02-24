@@ -10,7 +10,7 @@ _Interactive learning often enhances learner’s understanding of complex concep
 1. Stationarity and Correlations
 1. Smoothing Techniques
    1. Moving Average Dashboard
-   1. <a href="https://es-forecast.herokuapp.com/" target="_blank">Exponential Smoothing Dashboard]</a>$^2$
+   1. <a href="https://es-forecast.herokuapp.com/" target="_blank">Exponential Smoothing Dashboard</a>$^2$
    1. Holt-Winters
 1. Multiple Regression
 1. Autoregressive Moving Average (ARMA)
