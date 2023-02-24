@@ -1,4 +1,4 @@
-_Interactive learning often enhances learner’s understanding of complex concept as it is difficult to fully understand the concept without prior experience. With interactive learning, the learners can see the corresponding outcomes associated with changes in particular conditions and are able to retain and recall information as memory improved. To foster learning in the classroom, this study builds interactive dashboards which enable learners to gain hands-on experiment with time series forecast methods. A time series dataset collected from [Kaggle](https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting/data) containing approximately 3 years of Walmart Sales data was used for model training and testing. Each dashboard provides a YouTube video lecture of a specific time series concept, model architecture, and visualizations illustrating model’s results associated with changes in model’s hyperparameters. Researchers, educators, and students can benefit from using the dashboards because they enhance learning experiences and improve long-term memory as learners have a better understanding of the subject._
+_Interactive learning often enhances learner’s understanding of complex concept as it is difficult to fully understand the concept without prior experience. With interactive learning, the learners can see the corresponding outcomes associated with changes in particular conditions and are able to retain and recall information as memory improved. To foster learning in the classroom, this study builds interactive dashboards which enable learners to gain hands-on experiment with time series forecast methods. A time series dataset collected from [Kaggle](https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting/data) containing approximately 3 years of Walmart Sales data was used for model training and testing. Each dashboard contains model architecture and visualizations illustrating model’s results associated with changes in model’s hyperparameters. Researchers, educators, and students can benefit from using the dashboards because they enhance learning experiences and improve long-term memory as learners have a better understanding of the subject._
 
 <hr />
 
@@ -23,7 +23,7 @@ _Interactive learning often enhances learner’s understanding of complex concep
 
 1. Smoothing Techniques
    1. Moving Average Dashboard
-   1. <a href="https://es-forecast.herokuapp.com/" target="_blank">Exponential Smoothing Dashboard</a>$^2$
+   1. Exponential Smoothing Dashboard$^2$
    1. Holt-Winters
 1. Multiple Regression
 1. Autoregressive Moving Average (ARMA)
