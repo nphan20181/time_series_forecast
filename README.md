@@ -2,6 +2,12 @@ _Interactive learning often enhances learner’s understanding of complex concep
 
 <hr />
 
+## Dataset
+
+- [Raw Data](https://github.com/nphan20181/time_series_forecast/blob/main/data/walmart_sales.zip)
+- [Preprocessed Data](https://github.com/nphan20181/time_series_forecast/blob/main/data/ts_dataset.csv)
+- [Data Preparation Jupyter Notebook](https://github.com/nphan20181/time_series_forecast/blob/main/prepare_ts_data.ipynb)
+
 ## Time Series Forecast Dashboards
 
 ### Forecasting with Statistical Models
