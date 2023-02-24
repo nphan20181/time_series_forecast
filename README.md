@@ -23,7 +23,7 @@ _Interactive learning often enhances learner’s understanding of complex concep
 
 1. Smoothing Techniques
    1. Moving Average Dashboard
-   1. Exponential Smoothing Dashboard$^2$
+   1. Exponential Smoothing Dashboard $^2$
    1. Holt-Winters
 1. Multiple Regression
 1. Autoregressive Moving Average (ARMA)
