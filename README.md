@@ -12,8 +12,7 @@ _Interactive learning often enhances learner’s understanding of complex concep
 
 ## Time Series Analysis
 
-1. Time Series Decomposition
-1. [Stationarity & Correlations Dashboard](https://ts-forecast.herokuapp.com/ts-analysis)$^4$
+- [Time Series Analysis Dashboard (Stationarity | Correlations | Decomposition)](https://ts-forecast.herokuapp.com/ts-analysis)$^4$
 
 <hr />
 
