@@ -12,7 +12,7 @@ _Interactive learning often enhances learner’s understanding of complex concep
 
 ## Time Series Analysis
 
-- [Time Series Analysis Dashboard (Stationarity | Correlations | Decomposition)](https://ts-forecast.herokuapp.com/ts-analysis)$^4$
+- Time Series Analysis Dashboard 
 
 <hr />
 
@@ -22,7 +22,7 @@ _Interactive learning often enhances learner’s understanding of complex concep
 
 1. Smoothing Techniques
    1. Moving Average Dashboard
-   1. Exponential Smoothing Dashboard $^2$
+   1. Exponential Smoothing Dashboard 
    1. Holt-Winters
 1. Multiple Regression
 1. Autoregressive Moving Average (ARMA)
