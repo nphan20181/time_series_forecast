@@ -7,32 +7,17 @@ _Interactive learning often enhances learner’s understanding of complex concep
 - [Raw Data](https://github.com/nphan20181/time_series_forecast/blob/main/data/walmart_sales.zip)
 - [Preprocessed Data](https://github.com/nphan20181/time_series_forecast/blob/main/data/ts_dataset.csv)
 - [Data Preparation Jupyter Notebook](https://github.com/nphan20181/time_series_forecast/blob/main/prepare_ts_data.ipynb)
-
-<hr />
-
-## Time Series Analysis
-
-- Time Series Analysis Dashboard 
+- Exploratory Data Analysis
 
 <hr />
 
 ## Time Series Forecast Dashboards
 
-### Forecasting with Statistical Models
-
 1. Smoothing Techniques
-   1. Moving Average Dashboard
-   1. Exponential Smoothing Dashboard 
+   1. Exponential Smoothing
+   1. Holt's Trend Corrected Exponential Smoothing
    1. Holt-Winters
-1. Multiple Regression
-1. Autoregressive Moving Average (ARMA)
-1. Autoregressive Integrated Moving Average (ARIMA)
-1. Seasonal Autoregressive Intergrated Moving Average (SARIMA)
-
-### Forecasting with Deep Learning Models
-
-1. Convolutional Neural Networks (CNN)
-1. Long Short Term Memory (LSTM)
+1. Seasonal Autoregressive Intergrated Moving Average Exgoneous (SARIMAX)
 
 <hr />
 
@@ -43,6 +28,5 @@ _Interactive learning often enhances learner’s understanding of complex concep
 1. Bowerman, B. L., O’Connell, R. T., & Koehler, A. B. (2005). Forecasting, Time Series, and Regression. South-Western Pub.
 1. Peixeiro, M. (2022). Time Series Forecasting in Python. Simon and Schuster.
 1. Geron, A. (2022). Hands-On Machine Learning With Scikit-Learn, Keras, And Tensorflow 3E. S.L.: O’reilly Uk Limited.
-1. François Chollet. (2021). Deep Learning with Python, Second Edition. Shelter Island, Ny Manning Publications.
 
 ‌
