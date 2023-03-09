@@ -7,7 +7,7 @@ _Interactive learning often enhances learner’s understanding of complex concep
 - [Raw Data](https://github.com/nphan20181/time_series_forecast/blob/main/data/walmart_sales.zip)
 - [Preprocessed Data](https://github.com/nphan20181/time_series_forecast/blob/main/data/ts_dataset.csv)
 - [Data Preparation Jupyter Notebook](https://github.com/nphan20181/time_series_forecast/blob/main/prepare_ts_data.ipynb)
-- Exploratory Data Analysis
+- Time Series Analysis
 
 <hr />
 
@@ -17,6 +17,8 @@ _Interactive learning often enhances learner’s understanding of complex concep
    1. Exponential Smoothing
    1. Holt's Trend Corrected Exponential Smoothing
    1. Holt-Winters
+1. Multiplicative Decomposition
+1. Autoregressive Integrated Moving Average (ARIMA)
 1. Seasonal Autoregressive Intergrated Moving Average Exgoneous (SARIMAX)
 
 <hr />
