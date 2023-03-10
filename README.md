@@ -1,13 +1,16 @@
-_Interactive learning often enhances learner’s understanding of complex concept as it is difficult to fully understand the concept without prior experience. With interactive learning, the learners can see the corresponding outcomes associated with changes in particular conditions and are able to retain and recall information as memory improved. To foster learning in the classroom, this study builds interactive dashboards which enable learners to gain hands-on experiment with time series forecast methods. A time series dataset collected from [Kaggle](https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting/data) containing approximately 3 years of Walmart Sales data (2010-2012) was used for model training and testing. Each dashboard contains model architecture and visualizations illustrating model’s results associated with changes in model’s hyperparameters. Researchers, educators, and students can benefit from using the dashboards because they enhance learning experiences and improve long-term memory as learners have a better understanding of the subject._
+_Interactive learning often enhances learner’s understanding of complex concept as it is difficult to fully understand the concept without prior experience. With interactive learning, the learners can see the corresponding outcomes associated with changes in particular conditions and are able to retain and recall information as memory improved. To foster learning in the classroom, this study builds interactive dashboards which enable learners to gain hands-on experiment with statistical time series forecast methods. A time series dataset collected from [Kaggle](https://www.kaggle.com/c/walmart-recruiting-store-sales-forecasting/data) containing approximately 3 years of Walmart Sales data (2010-2012) was used for model training. Each dashboard contains model architecture and visualizations illustrating model’s results associated with changes in model’s hyperparameters. Researchers, educators, and students can benefit from using the dashboards because they enhance learning experiences and improve long-term memory as learners have a better understanding of the subject._
 
 <hr />
+
+## Website
+
+- [https://ts-forecast.herokuapp.com/](https://ts-forecast.herokuapp.com/)
 
 ## Dataset
 
 - [Raw Data](https://github.com/nphan20181/time_series_forecast/blob/main/data/walmart_sales.zip)
 - [Preprocessed Data](https://github.com/nphan20181/time_series_forecast/blob/main/data/ts_dataset.csv)
 - [Data Preparation Jupyter Notebook](https://github.com/nphan20181/time_series_forecast/blob/main/prepare_ts_data.ipynb)
-- Time Series Analysis
 
 <hr />
 
@@ -17,7 +20,6 @@ _Interactive learning often enhances learner’s understanding of complex concep
    1. Exponential Smoothing
    1. Holt's Trend Corrected Exponential Smoothing
    1. Holt-Winters
-1. Multiplicative Decomposition
 1. Autoregressive Integrated Moving Average (ARIMA)
 1. Seasonal Autoregressive Intergrated Moving Average Exgoneous (SARIMAX)
 
