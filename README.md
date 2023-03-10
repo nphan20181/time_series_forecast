@@ -14,10 +14,10 @@ _Interactive learning often enhances learner’s understanding of complex concep
 
 <hr />
 
-## Time Series Forecast Dashboards
+## Time Series Forecast Methods
 
 1. Smoothing Techniques
-   1. Exponential Smoothing
+   1. [Exponential Smoothing](https://github.com/nphan20181/time_series_forecast/blob/main/module/es_model.py)
    1. Holt's Trend Corrected Exponential Smoothing
    1. Holt-Winters
 1. Autoregressive Integrated Moving Average (ARIMA)
