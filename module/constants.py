@@ -1,9 +1,10 @@
 import numpy as np
 
-# set default labels
+# set labels
 X_LABEL ='Date'
 Y_LABEL ='Weekly Sales (Million)'
 T_LABEL = 'Time Period'
+ERROR_LABEL = 'Residual'
 
 # name of target variable according to transformation method
 TARGET = {'':'Weekly Sales (Million)', 

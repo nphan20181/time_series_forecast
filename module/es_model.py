@@ -43,10 +43,10 @@ class ExponentialSmoothing:
         
         # compute rolling forecasts
         data[self.forecast_label] = utf.inverse_transform(pd.Series(self.exponential_series[:-1]), self.transform_method)
-        data['Forecast Error'] = data[self.observe_label] - data[self.forecast_label]
+        data[const.ERROR_LABEL] = data[self.observe_label] - data[self.forecast_label]
         
         # compute standard error
-        self.standard_error = np.sqrt(sum(data['Forecast Error']**2) / (data.shape[0] - 1))
+        self.standard_error = np.sqrt(sum(data[const.ERROR_LABEL]**2) / (data.shape[0] - 1))
         
         # save data
         self.data = data
@@ -93,15 +93,15 @@ class ExponentialSmoothing:
             date_list.append(current_date)
         
         # create forecast data frame
-        df_forecast = pd.concat([pd.DataFrame({'Date': date_list}), 
-                                 pd.DataFrame({'Future Forecast': [self.data[self.forecast_label].values[-1]]*n_periods}), 
+        df_forecast = pd.concat([pd.DataFrame({'Date': date_list,
+                                               'Future Forecast': [self.data[self.forecast_label].values[-1]]*n_periods}), 
                                  self.predict_intervals(n_periods)], axis=1)
         
         return df_forecast
     
     def evaluate(self) -> pd.DataFrame:
         '''
-        Return evaluation metrics on Test data.
+        Return evaluation metrics.
         '''
         
         # evaluate model using Test data
