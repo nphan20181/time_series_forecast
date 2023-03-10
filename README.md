@@ -21,7 +21,7 @@ _Interactive learning often enhances learner’s understanding of complex concep
    1. [Holt's Trend Corrected Exponential Smoothing](https://github.com/nphan20181/time_series_forecast/blob/main/module/holt_trend_es.py)
    1. [Holt-Winters](https://github.com/nphan20181/time_series_forecast/blob/main/module/holt_winters.py)
 1. [Autoregressive Integrated Moving Average (ARIMA)](https://github.com/nphan20181/time_series_forecast/blob/main/module/arima_model.py)
-1. Seasonal Autoregressive Intergrated Moving Average Exgoneous (SARIMAX)
+1. [Seasonal Autoregressive Intergrated Moving Average Exgoneous (SARIMAX)](https://github.com/nphan20181/time_series_forecast/blob/main/module/sarimax_model.py)
 
 <hr />
 
