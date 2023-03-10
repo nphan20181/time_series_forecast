@@ -21,6 +21,9 @@ class ARIMA_Model:
         self.forecast_label = self.model_name + ' Forecast'           # set label for in-sample forecast
         
     def fit(self, ts_data):
+        '''
+        Train ARIMA model and make in-sample forecasts.
+        '''
         
         # duplicate original data
         data = ts_data.copy()
@@ -43,7 +46,7 @@ class ARIMA_Model:
         '''
         
         # perforem LJung-Box test for normality, p should be > 0.05
-        lb_test = acorr_ljungbox(self.data['Residual'].values, np.arange(1, 53, 1), return_df=True)
+        lb_test = acorr_ljungbox(self.data[const.ERROR_LABEL].values, np.arange(1, 53, 1), return_df=True)
         lb_stat = lb_test['lb_stat']
         p_value = lb_test['lb_pvalue']
         
