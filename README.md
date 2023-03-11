@@ -15,7 +15,7 @@ _Interactive learning often enhances learner’s understanding of complex concep
 ## Time Series Analysis
 
 - Stationary & Correlation
-- Multiplicative Decomposition
+- [Multiplicative Decomposition](https://github.com/nphan20181/time_series_forecast/blob/main/module/decomposition.py)
 
 ## Time Series Forecast Methods
 
